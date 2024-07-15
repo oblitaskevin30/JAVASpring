@@ -4,17 +4,20 @@ package com.example.demo.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
+
 import com.example.demo.model.Product;
 
-
-
-
-
-public class ProductRepository {
+@SessionScope
+@Repository("ImplRepository")
+public class ProductRepositoryImpl implements ProductRepository{
 
 	private List<Product> data;
 	
-	public ProductRepository() {
+	public ProductRepositoryImpl() {
 		this.data = Arrays.asList(
 				new Product(1L,"memoria corsarir",25L),
 				new Product(2L,"memoria2 corsarir",50L),

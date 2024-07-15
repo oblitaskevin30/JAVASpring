@@ -3,28 +3,45 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 
 
 
-public class ProductServices {
+@Service
+public class ProductServicesImpl implements ProductService{
 	
-	ProductRepository productRepository = new ProductRepository();
+	@Autowired
+	private ProductRepository productRepository;
 	
-	public List<Product> findAll(){
+	@Autowired
+	private Environment enviroment;
+	
+	
+	@Override
+	public List<Product> findAll(){	
 		
-//		return productRepository.findAll().stream().map(p->{
-//			p.setPrice(p.getPrice()+100);
-//			return p;
-//		})
-//		.collect(Collectors.toList());
-		return productRepository.findAll();
+		return productRepository.findAll().stream().map(p->{
+			
+			Double precioNuevo = p.getPrice()*enviroment.getProperty("config.price.tax", Double.class);
+			System.out.println(precioNuevo);
+//			Product productoNuevo = new Product(p.getId(),p.getName(),precioNuevo.longValue());
+			p.setPrice(precioNuevo.longValue());
+			return p;
+			})
+		.collect(Collectors.toList());
+
 	}
 	
-	public Product finById(Long id) {
+	@Override
+	public Product findById(Long id) {
 		return productRepository.findById(id);
 	}
+
 	
 	
 }
