@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "PlayStation",
+        "price": 1000
+    },
+    {
+        "id": 2,
+        "name": "Juegos4All",
+        "price": 96
+    },
+    {
+        "id": 3,
+        "name": "Ropa de Moda",
+        "price": 145
+    },
+    {
+        "id": 4,
+        "name": "iphone",
+        "price": 175
+    }
+]
